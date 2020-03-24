@@ -1,5 +1,7 @@
 import os
 import pymysql
+import datetime
+
 
 # Get username from GitPod workspace
 username = os.getenv('C9_USER')
@@ -13,10 +15,8 @@ connection = pymysql.connect(host='localhost',
 try:
     # Run a Query
     with connection.cursor() as cursor:
-        sql = "SELECT * FROM Artist;"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        print(result)
+        rows = cursor.execute("DELETE FROM Friends WHERE name = 'Bob';")
+        connection.commit()
 finally:
     # Close the connection, regardless of success
     connection.close()
